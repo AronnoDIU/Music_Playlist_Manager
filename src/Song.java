@@ -11,6 +11,10 @@ class Song {
         this.mood = mood;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
         return "Title: " + title + ", Artist: " + artist + ", Genre: " + genre + ", Mood: " + mood;
