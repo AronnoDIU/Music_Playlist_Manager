@@ -1,11 +1,60 @@
+import java.util.Scanner;
+
 public class MusicPlaylistApp {
     public static void main(String[] args) {
+        Scanner userInput = new Scanner(System.in);
         PlaylistManager playlistManager = new PlaylistManager();
-        playlistManager.addSongToPlaylist("My Playlist", new Song("Song 1", "Artist 1", "Genre 1", "Mood 1"));
-        playlistManager.addSongToPlaylist("My Playlist", new Song("Song 2", "Artist 2", "Genre 2", "Mood 2"));
-        playlistManager.addSongToPlaylist("My Playlist", new Song("Song 3", "Artist 3", "Genre 3", "Mood 3"));
-        playlistManager.viewPlaylist("My Playlist");
-        playlistManager.removeSongFromPlaylist("My Playlist", "Song 2");
-        playlistManager.viewPlaylist("My Playlist");
+
+        while (true) {
+            System.out.println("\nMusic Playlist Manager");
+            System.out.println("1. Add song to playlist");
+            System.out.println("2. View playlist");
+            System.out.println("3. Remove song from playlist");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = userInput.nextInt();
+            userInput.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter playlist name: ");
+                    String playlistName = userInput.nextLine();
+                    System.out.print("Enter song title: ");
+                    String title = userInput.nextLine();
+                    System.out.print("Enter artist name: ");
+                    String artist = userInput.nextLine();
+                    System.out.print("Enter genre: ");
+                    String genre = userInput.nextLine();
+                    System.out.print("Enter mood: ");
+                    String mood = userInput.nextLine();
+
+                    Song newSong = new Song(title, artist, genre, mood);
+                    playlistManager.addSongToPlaylist(playlistName, newSong);
+                    break;
+
+                case 2:
+                    System.out.print("Enter playlist name: ");
+                    String viewPlaylistName = userInput.nextLine();
+                    playlistManager.viewPlaylist(viewPlaylistName);
+                    break;
+
+                case 3:
+                    System.out.print("Enter playlist name: ");
+                    String removePlaylistName = userInput.nextLine();
+                    System.out.print("Enter song title to remove: ");
+                    String removeSongTitle = userInput.nextLine();
+                    playlistManager.removeSongFromPlaylist(removePlaylistName, removeSongTitle);
+                    break;
+
+                case 4:
+                    System.out.println("Exiting the program.");
+                    userInput.close();
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
     }
 }
